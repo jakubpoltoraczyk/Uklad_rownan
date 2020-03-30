@@ -45,6 +45,27 @@ Macierz Macierz::operator - (const Macierz & m)const
     return pom;
 }
 
+Macierz Macierz::operator * (const Macierz & m)const
+{
+    Macierz pom;
+    for(int i=0;i<size;++i)
+        for(int j=0;j<size;++j)
+            pom[i][j]=tab[i]*m.get_column(j);
+    return pom;
+}
+
+Vector Macierz::operator * (const Vector & v)const
+{
+    double pom[size];
+    for(int i=0;i<size;++i)
+        pom[i]=0.0;
+    for(int i=0;i<size;++i)
+    {
+        pom[i]=tab[i]*v;
+    }
+    return Vector(pom);
+}
+
 std::ostream & operator << (std::ostream & o, const Macierz & m)
 {
     for(int i=0;i<size;++i)

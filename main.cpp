@@ -9,8 +9,11 @@ int main(void)
     using std::cin;
     std::ifstream plik;
     plik.open("plik");
-    Uklad rownanie;
-    plik >> rownanie;
-    cout << rownanie << endl;
+    Macierz one;
+    Vector two,result;
+    plik >> one >> two;
+    result=one*two;
+    cout << endl << result << endl;
+    plik.close();
     return 0;
 }

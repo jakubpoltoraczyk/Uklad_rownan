@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-const int size = 3;
+const int size = 4;
 
 class Vector
 {
