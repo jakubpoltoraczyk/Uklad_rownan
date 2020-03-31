@@ -1,10 +1,10 @@
-#ifndef WEKTOR_H
-#define WEKTOR_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <iostream>
 #include <cmath>
 
-const int size = 4;
+const int size = 3;
 
 class Vector
 {
@@ -19,9 +19,10 @@ public:
     Vector operator + (const Vector & v) const;
     Vector operator - (const Vector & v) const;
     double operator * (const Vector & v)const;
+    Vector operator * (double n)const;
 };
 
 std::ostream & operator << (std::ostream & o, const Vector & v);
 std::istream & operator >> (std::istream & i, Vector & v);
 
-#endif //WEKTOR_H
+#endif //VECTOR_H

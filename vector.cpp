@@ -1,4 +1,4 @@
-#include "wektor.h"
+#include "vector.h"
 
 Vector::Vector()
 {
@@ -38,10 +38,18 @@ Vector Vector::operator - (const Vector & v) const
 
 double Vector::operator * (const Vector & v)const
 {
-    double sum;
+    double sum=0.0;
     for(int i=0;i<size;++i)
         sum+=data[i]*v[i];
     return sum;
+}
+
+Vector Vector::operator * (double n)const
+{
+    double tab[size];
+    for(int i=0;i<size;++i)
+        tab[i]=data[i]*n;
+    return Vector(tab);    
 }
 
 std::ostream & operator << (std::ostream & o, const Vector & v)

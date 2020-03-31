@@ -1,4 +1,4 @@
-#include "uklad.h"
+#include "system.h"
 #include <iostream>
 #include <fstream>
 
@@ -9,11 +9,9 @@ int main(void)
     using std::cin;
     std::ifstream plik;
     plik.open("plik");
-    Macierz one;
-    Vector two,result;
-    plik >> one >> two;
-    result=one*two;
-    cout << endl << result << endl;
+    System rownanie;
+    plik >> rownanie;
+    cout << rownanie << endl;
     plik.close();
     return 0;
 }
