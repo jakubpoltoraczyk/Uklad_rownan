@@ -21,7 +21,9 @@ std::ostream & operator << (std::ostream & o, const System & u)
     using std::endl;
     o << "Macierz:\n\n" << u.get_matrix() << endl << endl;
     o << "Wektor wyrazow wolnych:\n\n" << u.get_vector() << endl << endl;
-    o << "Rozwiazanie (x,y,z):\n\n" << u.solve();
+    o << "Rozwiazanie (x,y,z):\n\n" << u.solve() << endl << endl;
+    o << "Wektor bledu:\n\n" << u.vector_mistake() << endl << endl;
+    o << "Wartosc bledu:\n\n" << u.value_of_mistake() << endl << endl; 
     return o;
 }
 

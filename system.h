@@ -15,6 +15,8 @@ public:
     const Matrix & get_matrix() const {return mat;}
     const Vector & get_vector() const {return vec;}
     Vector solve()const;
+    Vector vector_mistake() const {return get_matrix()*solve()-get_vector();}
+    double value_of_mistake() const {return vector_mistake().lenght();}
 };
 
 std::ostream & operator << (std::ostream & o, const System & u);
