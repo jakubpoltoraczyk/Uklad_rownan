@@ -1,38 +1,40 @@
-#include "system.h"
+#include "system.h" // dolaczenie klasy System
 
-Vector System::solve()const
+/* Jest to plik z definicjami wszelkich funkcji zwiazanymi z klasa System */
+
+Vector System::solve()const // metoda rozwiazujaca rownanie i podajaca jego wynik w postaci wektora
 {
-    Matrix pom=get_matrix();
-    Vector result;
-    double det[size];
-    double det_main=get_matrix().det();
-    for(int i=0;i<size;++i)
+    Matrix pom=get_matrix(); // pomocnicza macierz bedaca kopia macierzy rownania
+    Vector result; // pomocniczy wektor wynikowy
+    double det[size]; // pomocnicza tablica, ktorej skladowe to dodatkowe wyznacznika rownania
+    double det_main=get_matrix().det(); // zmienna okreslajaca wyznacznik glowny rownania
+    for(int i=0;i<size;++i) // obliczanie poszczegolnych skladowych wektora wynikowego
     {
-        pom.set_column(get_vector(),i);
-        det[i]=pom.det();
-        det[i]/=det_main;
-        pom=get_matrix();
+        pom.set_column(get_vector(),i); // zamiana kolumny z wektorem wyrazow wolnych w macierzy pomocniczej
+        det[i]=pom.det(); // obliczenie dodatkowego wyznacznika o numerze danej skladowej
+        det[i]/=det_main; // podzielenie go przez wyznacznik glowny (otrzymanie rezultatu danej skladowej wektora wynikowego)
+        pom=get_matrix(); // powrotne ustawienie macierzy pomocniczej jako kopii macierzy glownej rownania
     }
-    return Vector(det);
+    return Vector(det); // zwrocenie wektora wynikowego
 }
 
-std::ostream & operator << (std::ostream & o, const System & u)
+std::ostream & operator << (std::ostream & o, const System & u) // przeciazenie operatora << dla klasy System
 {
     using std::endl;
-    o << "Macierz:\n\n" << u.get_matrix() << endl << endl;
-    o << "Wektor wyrazow wolnych:\n\n" << u.get_vector() << endl << endl;
-    o << "Rozwiazanie (x,y,z):\n\n" << u.solve() << endl << endl;
-    o << "Wektor bledu:\n\n" << u.vector_mistake() << endl << endl;
-    o << "Wartosc bledu:\n\n" << u.value_of_mistake() << endl << endl; 
-    return o;
+    o << "Macierz:\n\n" << u.get_matrix() << endl << endl; // wyswietlenie macierzy rownania
+    o << "Wektor wyrazow wolnych:\n\n" << u.get_vector() << endl << endl; // wyswietlenie wyrazow wolnych rownania
+    o << "Rozwiazanie (x,y,z):\n\n" << u.solve() << endl << endl; // wyswietlenie wektora wynikowego rownania
+    o << "Wektor bledu:\n\n" << u.vector_mistake() << endl << endl; // wyswietlenie wektora bledu
+    o << "Wartosc bledu:\n\n" << u.value_of_mistake() << endl << endl;  // wyswietlenie wartosci bledu
+    return o; // zwrocenie obiektu klasy ostream
 }
 
-std::istream & operator >> (std::istream & i, System & u)
+std::istream & operator >> (std::istream & i, System & u) // przeciazenie operatora >> dla klasy System
 {
-    Matrix pom_mat;
-    Vector pom_vec;
-    i >> pom_mat;
-    i >> pom_vec;
-    u=System(pom_mat,pom_vec);
-    return i;
+    Matrix pom_mat; // pomocnicza macierz
+    Vector pom_vec; // pomocniczy wektor
+    i >> pom_mat; // pobranie macierzy za pomoca przeciazonego dla niej operatora >> 
+    i >> pom_vec; // pobranie wektora za pomoca przeciazonego dla niego operatora >> 
+    u=System(pom_mat,pom_vec); // przypisanie nowego ukladu rownan do orginalu za pomoca konstruktora
+    return i; // zwrocenie obiektu klasy istream
 }

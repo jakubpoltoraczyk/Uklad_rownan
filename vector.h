@@ -4,25 +4,26 @@
 #include <iostream>
 #include <cmath>
 
-const int size = 3;
+const int size = 3; // ustawienie rozmiaru kolumny macierzy
 
-class Vector
+class Vector // Klasa Vector opisujaca matematyczny wektor
 {
 private:
-    double data[size];
+    double data[size]; // tablica sluzaca do przechowywania skladowych wektora
 public:
-    Vector();
-    explicit Vector(const double * tab);
-    double lenght() const;
-    const double & operator [] (int n) const {return data[n];}
-    double & operator [] (int n) {return data[n];}
-    Vector operator + (const Vector & v) const;
-    Vector operator - (const Vector & v) const;
-    double operator * (const Vector & v)const;
-    Vector operator * (double n)const;
+    Vector(); // konstruktor domyslny
+    explicit Vector(const double * tab); // konstruktor przyjmujacy jako argument tablice wartosci typu double
+    double lenght() const; // metoda zwracajaca dlugosc wektora
+    const double & operator [] (int n) const; // przeciazony operator [] (dostep do skladowych wektora - wersja const)
+    double & operator [] (int n); // przeciazony operator [] (dostep do skladowych wektora - wersja bez const)
+    Vector operator + (const Vector & v) const; // metoda dodajaca do siebie dwa wektory
+    Vector operator - (const Vector & v) const; // metoda odejmujaca od siebie dwa wektory
+    double operator * (const Vector & v)const; // metoda mnozaca ze soba dwa wektory
+    Vector operator * (double n)const; // metoda mnozaca wektor przez wartosc typu double
 };
 
-std::ostream & operator << (std::ostream & o, const Vector & v);
-std::istream & operator >> (std::istream & i, Vector & v);
+/* Funkcje bezposrednio zwiazane z klasa Vector */
+std::ostream & operator << (std::ostream & o, const Vector & v); // przeciazenie operatora << dla klasy Vector 
+std::istream & operator >> (std::istream & i, Vector & v); // przeciazenie operatora >> dla klasy
 
 #endif //VECTOR_H
