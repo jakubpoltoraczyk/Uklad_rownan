@@ -8,12 +8,20 @@ Vector System::solve()const // metoda rozwiazujaca rownanie i podajaca jego wyni
     Vector result; // pomocniczy wektor wynikowy
     double det[size]; // pomocnicza tablica, ktorej skladowe to dodatkowe wyznacznika rownania
     double det_main=get_matrix().det(); // zmienna okreslajaca wyznacznik glowny rownania
-    for(int i=0;i<size;++i) // obliczanie poszczegolnych skladowych wektora wynikowego
+    if(std::abs(det_main)>epsilon) // jesli glowny wyznacznik nie jest zerem
     {
-        pom.set_column(get_vector(),i); // zamiana kolumny z wektorem wyrazow wolnych w macierzy pomocniczej
-        det[i]=pom.det(); // obliczenie dodatkowego wyznacznika o numerze danej skladowej
-        det[i]/=det_main; // podzielenie go przez wyznacznik glowny (otrzymanie rezultatu danej skladowej wektora wynikowego)
-        pom=get_matrix(); // powrotne ustawienie macierzy pomocniczej jako kopii macierzy glownej rownania
+        for(int i=0;i<size;++i) // obliczanie poszczegolnych skladowych wektora wynikowego
+        {
+            pom.set_column(get_vector(),i); // zamiana kolumny z wektorem wyrazow wolnych w macierzy pomocniczej
+            det[i]=pom.det(); // obliczenie dodatkowego wyznacznika o numerze danej skladowej
+            det[i]/=det_main; // podzielenie go przez wyznacznik glowny (otrzymanie rezultatu danej skladowej wektora wynikowego)
+            pom=get_matrix(); // powrotne ustawienie macierzy pomocniczej jako kopii macierzy glownej rownania
+        }
+    }
+    else // jesli glowny wyznacznik jest zerem
+    {
+        std::cerr << "Glowny wyznacznik macierzy jest rowny zero. Brak rozwiazania." << std::endl;
+        exit(2); // komunikat i wyjscie z programu
     }
     return Vector(det); // zwrocenie wektora wynikowego
 }

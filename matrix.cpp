@@ -87,22 +87,32 @@ Vector Matrix::operator * (const Vector & v)const // metoda mnozaca macierz prze
     return Vector(pom); // zwrocenie powstalego na skutek mnozenia wektora (powstalego za pomoca konstruktora)
 }
 
-double Matrix::det()const
+double Matrix::det()const // metoda wyliczajaca wyznacznik macierzy
 {
-    using namespace std;
-    double value,result=1;
-    Matrix pom=*this;
+    double value,result=1.0; // zmienna do przechowywania tymczasowych wartosci oraz zmienna do przechowywania ostatecznego wyniku
+    int counter=0; // licznik zamian wierszy
+    Matrix pom=*this; // macierz pomocnicza bedaca kopia macierzy glownej
     for(int i=0;i<size-1;++i)
     {
         for(int j=i+1;j<size;++j)
         {
-            value=pom.tab[j][i]/pom.tab[i][i];
-            pom.tab[j]=pom.tab[j]-(pom.tab[i]*value);
+            if(std::abs(pom.tab[i][i])>epsilon) // jesli konkretna skladowa macierzy nie jest zerem
+            { // nastapi doprowadzenie do wyzerowania pierwszego niezerowego elementu danego wiersza, poprzez odjecie dwoch wierszy od siebie
+                value=pom.tab[j][i]/pom.tab[i][i]; // ustawienie value na iloraz dwoch konkretnych skladowych
+                pom.tab[j]=pom.tab[j]-(pom.tab[i]*value); // odjecie od siebie dwoch wierszy, w tym jednego pomnozonego razy value
+            }
+            else // jesli konkretna skladowa jest zerem
+            {
+                std::swap(pom.tab[i],pom.tab[i+1]); // zamiana miejscami dwoch wierszy
+                ++counter; // aktualizacja licznika
+            }
         }
     }
-    for(int i=0;i<size;++i)
+    for(int i=0;i<size;++i) // przemnozenie przez siebie elementow lezacych na przekatnej macierzy
         result*=pom[i][i];
-    return result;
+    if(counter%2==0) // jesli licznik zamian jest nieparzysty
+        result=-result; // zamiana znaku wyznacznika
+    return result; // zwrocenie wartosci wyznacznika
 }
 
 std::ostream & operator << (std::ostream & o, const Matrix & m) // przeciazenie operatora << dla obiektow klasy Matrix

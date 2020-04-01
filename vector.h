@@ -4,7 +4,8 @@
 #include <iostream>
 #include <cmath>
 
-const int size = 3; // ustawienie rozmiaru kolumny macierzy
+const int size=3;
+const double epsilon=0.0000000001;
 
 class Vector // Klasa Vector opisujaca matematyczny wektor
 {

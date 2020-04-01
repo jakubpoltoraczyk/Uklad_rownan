@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include "vector.h" // dolaczenie deklaracji klasy Vector
+#include <algorithm>
 
 /* WAZNE - macierz interpretowana wierszowo - np. wektor(x1,y1,z1) sklada sie na pierwszy wiersz macierzy */
 /* WAZNE - macierz pobierana jest w postaci transponowanej - np. kolumna (x1,x2,x3) sklada sie na pierwszy wiersz pliku */
