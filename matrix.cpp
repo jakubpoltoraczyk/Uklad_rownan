@@ -103,14 +103,21 @@ double Matrix::det()const // metoda wyliczajaca wyznacznik macierzy
             }
             else // jesli konkretna skladowa jest zerem
             {
-                std::swap(pom.tab[i],pom.tab[i+1]); // zamiana miejscami dwoch wierszy
-                ++counter; // aktualizacja licznika
+                for(int k=i+1;k<size;++k) // poszukiwanie w petli wiersza, ktorego odpowiednia skladowa nie jest zerem
+                {
+                    if(std::abs(pom.tab[k][i])>epsilon) // sprawdzenie warunku czy nie jest zerem
+                    {
+                        std::swap(pom.tab[i],pom.tab[k]); // zamiana miejscami dwoch wierszy (funkcja swap z biblioteki algorithm)
+                        ++counter; // aktualizacja licznika
+                        k=size; // przerwanie wykonania petli
+                    }
+                }
             }
         }
     }
     for(int i=0;i<size;++i) // przemnozenie przez siebie elementow lezacych na przekatnej macierzy
         result*=pom[i][i];
-    if(counter%2==0) // jesli licznik zamian jest nieparzysty
+    if(counter%2!=0) // jesli licznik zamian jest nieparzysty
         result=-result; // zamiana znaku wyznacznika
     return result; // zwrocenie wartosci wyznacznika
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cmath>
 
-const int size=3;
+const int size=4;
 const double epsilon=0.0000000001;
 
 class Vector // Klasa Vector opisujaca matematyczny wektor
