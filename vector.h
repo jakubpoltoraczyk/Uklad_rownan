@@ -1,11 +1,9 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include "const_value.h" // dolaczenie stalych wartosci
 #include <iostream>
 #include <cmath>
-
-const int size=4;
-const double epsilon=0.0000000001;
 
 class Vector // Klasa Vector opisujaca matematyczny wektor
 {
@@ -15,7 +13,7 @@ public:
     Vector(); // konstruktor domyslny
     explicit Vector(const double * tab); // konstruktor przyjmujacy jako argument tablice wartosci typu double
     double lenght() const; // metoda zwracajaca dlugosc wektora
-    const double & operator [] (int n) const; // przeciazony operator [] (dostep do skladowych wektora - wersja const)
+    double operator [] (int n) const; // przeciazony operator [] (dostep do skladowych wektora - wersja const)
     double & operator [] (int n); // przeciazony operator [] (dostep do skladowych wektora - wersja bez const)
     Vector operator + (const Vector & v) const; // metoda dodajaca do siebie dwa wektory
     Vector operator - (const Vector & v) const; // metoda odejmujaca od siebie dwa wektory

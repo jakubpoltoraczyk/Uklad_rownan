@@ -22,7 +22,7 @@ double Vector::lenght()const // metoda zwracajca dlugosc wektora
     return sqrt(sum); // zwrocenie pierwiastka z owej sumy
 }
 
-const double & Vector::operator [] (int n)const // metoda dostepu do poszczeglonych skladowych wektora (przeciazony [] wersja const)
+double Vector::operator [] (int n)const // metoda dostepu do poszczeglonych skladowych wektora (przeciazony [] wersja const)
 {
     if(n<size&&n>=0) // sprawdzenie poprawnosci indeksu
         return data[n]; // zwrocenie odpowiedniej skladowej
