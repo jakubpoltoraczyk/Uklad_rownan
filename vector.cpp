@@ -79,9 +79,7 @@ std::ostream & operator << (std::ostream & o, const Vector & v) // przeciazenie 
 
 std::istream & operator >> (std::istream & i, Vector & v) // przeciazenie operatora >> dla klasy Vector
 {
-    double tab[size]; // pomocnicza tablica do zapamietywania poszczegolnych skladowych 
     for(int n=0;n<size;++n) // podanie nowych skladowych wektora
-        i >> tab[n];
-    v=Vector(tab); // przypisanie nowego wektora utworzonego za pomoca konstruktora do obecnego
+        i >> v[n];
     return i; // zwrocenie obiektu klasy istream
 }

@@ -55,9 +55,8 @@ void Matrix::transposition() // metoda wykonujaca transpozycje macierzy
 Matrix Matrix::operator + (const Matrix & m)const // metoda dodajaca do siebie dwie macierze
 {
     Matrix pom; // pomocnicza macierz
-    for(int i=0;i<size;++i) // w podwojnej petli dodawanie do siebie poszczegolnych elementow macierzy
-        for(int j=0;j<size;++j)
-            pom[i][j]=m[i][j]+tab[i][j];
+    for(int i=0;i<size;++i) // w petli dodawanie do siebie poszczegolnych elementow macierzy
+        pom[i]=tab[i]+m[i];
     return pom; // zwrocenie nowej zsumowanej macierzy
 }
 
@@ -65,8 +64,7 @@ Matrix Matrix::operator - (const Matrix & m)const // metoda odejmujaca od siebie
 {
     Matrix pom; // pomocnicza macierz
     for(int i=0;i<size;++i) // w podwojnej petli odejmowanie od siebie poszczegolnych elementow macierzy
-        for(int j=0;j<size;++j)
-            pom[i][j]=m[i][j]-tab[i][j];
+        pom[i]=tab[i]-m[i];
     return pom; // zwrocenie nowej zroznicowanej macierzy
 }
 
@@ -132,10 +130,8 @@ std::ostream & operator << (std::ostream & o, const Matrix & m) // przeciazenie 
 
 std::istream & operator >> (std::istream & i, Matrix & m) // przeciazenie operatora >> dla obiektow klasy Matrix
 {
-    Vector pom[size]; // utworzenie pomocniczej tablicy obiektow klasy Vector
     for(int n=0;n<size;++n) // pobranie kolejnych obiektow Vector za pomoca przeciazonego dla nich operatora >> 
-        i >> pom[n];
-    m=Matrix(pom); // przypisanie nowej macierzy powstalej za pomoca konstruktora do obecnej macierzy
-    m.transposition(); // wykonanie transpozycji ze wzgledu na pobieranie macierzy w postaci transponowanej
+        i >> m[n];
+    m.transposition();
     return i; // zwrocenie obiektu klasy istream
 }
