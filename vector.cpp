@@ -14,14 +14,6 @@ Vector::Vector(const double * tab) // konstruktor przyjmujacy tablice jako swoj 
         data[i]=tab[i];
 }
 
-double Vector::lenght()const // metoda zwracajca dlugosc wektora
-{
-    double sum=0.0;
-    for(int i=0;i<size;++i) // sumowanie kwadratow kolejnych skladowych wektora
-        sum+=data[i]*data[i];
-    return sqrt(sum); // zwrocenie pierwiastka z owej sumy
-}
-
 double Vector::operator [] (int n)const // metoda dostepu do poszczeglonych skladowych wektora (przeciazony [] wersja const)
 {
     if(n<size&&n>=0) // sprawdzenie poprawnosci indeksu

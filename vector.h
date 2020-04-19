@@ -12,7 +12,7 @@ private:
 public:
     Vector(); // konstruktor domyslny
     explicit Vector(const double * tab); // konstruktor przyjmujacy jako argument tablice wartosci typu double
-    double lenght() const; // metoda zwracajaca dlugosc wektora
+    double lenght() const {return sqrt(*this**this);} // metoda zwracajaca dlugosc wektora
     double operator [] (int n) const; // przeciazony operator [] (dostep do skladowych wektora - wersja const)
     double & operator [] (int n); // przeciazony operator [] (dostep do skladowych wektora - wersja bez const)
     Vector operator + (const Vector & v) const; // metoda dodajaca do siebie dwa wektory
