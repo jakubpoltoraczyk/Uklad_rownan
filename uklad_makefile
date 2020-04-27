@@ -1,0 +1,23 @@
+#Makefile dla programu Uklad_rownan
+
+CPPFLAGS = -Wall -pedantic -std=c++17
+
+all: uklad clean
+
+uklad: main.o vector.o matrix.o system.o
+	g++ ${CPPFLAGS} -o uklad main.o vector.o matrix.o system.o
+
+main.o: main.cpp system.h
+	g++ ${CPPFLAGS} -c main.cpp
+
+vector.o: vector.cpp vector.h const_value.h
+	g++ ${CPPFLAGS} -c vector.cpp
+
+matrix.o: matrix.cpp matrix.h
+	g++ ${CPPFLAGS} -c matrix.cpp
+
+system.o: system.cpp system.h
+	g++ ${CPPFLAGS} -c system.cpp
+
+clean:
+	@rm -f *.o *~
